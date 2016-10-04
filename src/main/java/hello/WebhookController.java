@@ -1,20 +1,19 @@
 package hello;
 
+import com.gocardless.resources.Event;
+import com.google.gson.Gson;
+import org.apache.commons.codec.digest.HmacUtils;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.http.ResponseEntity;
-import org.apache.commons.codec.digest.HmacUtils;
-import com.google.gson.*;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import com.gocardless.resources.Event;
-import static com.gocardless.resources.Event.ResourceType.MANDATES;
 
 @RestController
-public class HelloController {
+public class WebhookController {
 
     private boolean isValidSignature(String signature, String payload) {
         String secret = System.getenv("GC_WEBHOOK_SECRET");
